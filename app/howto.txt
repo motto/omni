@@ -1,0 +1,32 @@
+App beállítás:
+---------------
+
+A kezdö app-ot a CONF::$baseApp-ban állítjuk-be 
+az index.php ez alapján tölti fel a GOB::$app-ot
+Ha van GET['app'] azzal felülírja.
+
+
+File becsatolások:
+------------------
+
+index.php:
+Ha van  a GOB::$app-al megegyező nevű mappában GOB::$app-al megegyező nevű php file
+akkor azt csatolaja be az index.php. 
+Ekkor olyan applikációt futtatunk ami nem használja 
+vagy nem szabványosanhasználja az App osztályt.
+ha nincs ilyen mappában ilyen file akkor becsatolja az app.php-t
+
+app.php:
+becsatolja az app-nak megfelelő inifile-t 
+alapesetben a GOB::$app.ini.php-t
+ ha van GOB::$app- nak megfelelő könyvtárban GOB::$app.ini.php akkor azt
+
+ha van $_GET['iniF'] akkor először  a GOB::$app.'/'.$_GET['iniF'].'.ini.php'-val
+próbálkozik ha nincs akkor a $_GET['iniF'].'.ini.php-csatolja be
+
+admin.ini.php:
+ha az app admin  és nincs az admin könytárban a $_GET['iniF']-nek megfelelő ini.php file
+akkor az admin.ini.php- csatolódik meg ami ha van becsatolja az almappákban lévő
+$_GET['iniF'].'.ini.php-t ha nem sikerül az alpértelmeztt admin oldalt generálja
+ 
+

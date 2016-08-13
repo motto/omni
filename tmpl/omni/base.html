@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Omnihund</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+       
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+ 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    
+    --> 
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>   
+  <link rel="stylesheet" href="tmpl/omni/res/bootstrap_sajat1.min.css" type="text/css">
+    
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->  
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="tmpl/omni/res/sajat.css" type="text/css">
+<script type="text/javascript"> 
+$(document).ready(function(){ 
+	
+	$("#myModal").on("show.bs.modal", function(e) {
+		var wd=$(window).width();
+		var modalwd=$(window).width()*0.6;
+	    var link = $(e.relatedTarget);
+	    $(this).find(".modal-body").load(link.attr("href"));
+	  // $('.modal-dialog').css('width', wd);
+	  
+ // $('.modal-content').css('min-width', '800px');
+	  //  $('.modal-dialog').css('overflow-y','auto');
+	   // var windowWidth = $(window).width();   
+	   //var boxWidth= $('#modaldialog').width();
+	   //$('#myModal').css('left',(wd - modalwd)/2);
+	  // $('#myModal').css('position','absolute');
+	  // $('#myModal').css('left','0px');
+	   
+	});	
+	//$('[data-tg="tooltip"]').tooltip(); 
+	$('.btn').tooltip({ html: true}); 
+});
+</script>
+</head>
+<body>
+
+
+<section class="container1">
+    <div class="row">
+        <div class=" main-image col-sm-12">
+        <div class="formdiv" style="border-radius: 20px 0px 0px 0px;padding-bottom:10px;padding-top:20px;padding-right:40px;padding-left:40px;">
+        <!--|login|-->
+        </div>
+        
+        </div>
+    </div>
+</section>
+
+<section class="container2">
+ <div class="row">
+
+
+        <div class="col-sm-12 " >
+            <div class="content" style="margin:5px;">
+           <!--|content|-->
+            </div>
+        </div>
+        
+        </div>
+</section>
+
+
+</body>
+</html>

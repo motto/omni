@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Site made with Mobirise Website Builder v2.10, https://mobirise.com -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="generator" content="Mobirise v2.10, mobirise.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="assets/images/logo-300x44-75.png" type="image/x-icon">
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&amp;subset=cyrillic,latin,greek,vietnamese">
+    <link rel="stylesheet" href="tmpl/social/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="tmpl/social/assets/animate.css/animate.min.css">
+    <link rel="stylesheet" href="tmpl/social/assets/socicon/css/socicon.min.css">
+    <link rel="stylesheet" href="tmpl/social/assets/mobirise/css/style.css">
+    <link rel="stylesheet" href="tmpl/social/assets/mobirise/css/mbr-additional.css" type="text/css">
+    <script>
+
+        //<!--var_itemid-->
+        $( document ).ready(function() {
+
+            $('#'+itemid).css('border-color','red') ;
+            $('#'+itemid).css('border-width','3px') ;
+
+            $('.varoperc').each( function() {
+                var p = $(this).text();
+                var perc=parseInt(p);
+                // $(this).text(perc);
+                if(perc<10){ $(this).css('background-color','blue')}
+                if(perc<1){ $(this).css('background-color','green')
+                    $(this).text('0');
+                }
+
+
+
+            });
+            $('#faucetform').on('change', function(){
+                var vv=$('input[name="pont1"]:checked', '#faucetform').val();
+                if(vv>0){ $("#pont").val(vv);}
+                var vv2=$('input[name="perc1"]:checked', '#faucetform').val();
+                if(vv2>0){ $("#perc").val(vv2);}
+            });
+
+
+        });
+
+
+        function infokapcs(){
+            if( $('#infoablak').css('display')=='none')
+            {
+                $('#infoablak').css('display','block') ;
+            }
+            else
+            {
+                $('#infoablak').css('display','none') ;
+            }
+
+            // alert('hello');
+        }
+        function visszaszamol(){
+            // $('.varoperc').innerText()= '10';
+            $('.varoperc').each( function() {
+                var p = $(this).text();
+                var perc=parseInt(p);
+                perc =perc-1;
+                $(this).text(perc);
+                if(perc<10){ $(this).css('background-color','blue')}
+                if(perc<1){ $(this).css('background-color','green')
+                    $(this).text('0');
+                }
+            });
+        }
+        //setTimeout(explode, 2000);
+        var refreshId = setInterval("visszaszamol()", 60000);
+
+    </script>
+    <style>
+        .varolink
+        {
+            float: left;
+            background-color:white ;
+            width: 150px;
+            color: #080808;
+            padding: 2px;
+            margin: 1px;
+            overflow: hidden;
+        }
+        .varopont
+        {
+            float: left;
+            background-color:white ;
+            width: 40px;
+            color: #080808;
+            padding: 2px;
+            margin: 1px;
+        }
+        .varoperc {
+            float: left;
+            background-color: red;
+            color: yellow;
+            width: 40px;
+            padding: 2px;
+            margin: 1px;
+        }
+        #infoablak{
+            /* position: fixed;
+            top: 10%;
+            */
+            background-color:#2C3E50 ;
+            width: 250px;
+            z-index: 1000;
+
+        }
+        .varodiv
+        {
+            border-style: solid;
+            border-width: 0px;
+            border-color: blue;
+            float: left;
+        }
+
+
+
+    </style>';
+
+
+</head>
+<body>
+
+<section class="mbr-navbar mbr-navbar--freeze mbr-navbar--absolute mbr-navbar--sticky mbr-navbar--auto-collapse" id="ext_menu-0">
+    <div class="mbr-navbar__section mbr-section">
+        <div class="mbr-section__container container">
+            <div class="mbr-navbar__container">
+                <div class="mbr-navbar__column mbr-navbar__column--s mbr-navbar__brand">
+                    <span class="mbr-navbar__brand-link mbr-brand mbr-brand--inline">
+                        <span class="mbr-brand__logo"><a href=""><img src="tmpl/social/assets/images/logo-300x44-75.png" class="mbr-navbar__brand-img mbr-brand__img" alt=""></a></span>
+
+                    </span>
+                </div>
+                <div class="mbr-navbar__hamburger mbr-hamburger"><span class="mbr-hamburger__line"></span></div>
+                <div class="mbr-navbar__column mbr-navbar__menu">
+                    <nav class="mbr-navbar__menu-box mbr-navbar__menu-box--inline-right">
+                        <div class="mbr-navbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active"><li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="index.php">HOME</a></li><li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="index.php?app=rotator">FAUCET ROTÁTOR</a></li><li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="index.php?app=admin">FELHSZNÁLÓI FELÜLET</a></li> <li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="/index.php?app=base&amp;fget=contact">KAPCSOLAT</a></li> </ul></div>
+                            <div class="mbr-navbar__column"><ul class="mbr-navbar__items mbr-navbar__items--right mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-inverse mbr-buttons--active">
+                            <li class="mbr-navbar__item"><a href="index.php?app=rotator" class="mbr-buttons__btn btn btn-primary text-white">LAPOZ</a></li>
+                            <li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-primary" href="index.php?app=base&amp;fget=faq">GYIK</a></li> <li class="mbr-navbar__item"><a class="mbr-buttons__btn btn btn-primary" href="index.php?app=base&amp;fget=cikk">KÁVÉZÓ</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background"  style=" top:100px;background-color: rgb(86, 183, 185);">
+
+
+    <div class="mbr-section__container container">
+        <!--|tartalom|-->
+    </div>
+</section>
+<section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts3-7" style="background-color: rgb(71, 77, 78);">
+
+    <div class="mbr-section__container container">
+
+    </div>
+</section>
+
+<script src="tmpl/social/assets/web/assets/jquery/jquery.min.js"></script>
+<script src="tmpl/social/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="tmpl/social/assets/smooth-scroll/SmoothScroll.js"></script>
+<script src="tmpl/social/assets/jarallax/jarallax.js"></script>
+<script src="tmpl/social/assets/social-likes/social-likes.js"></script>
+<!--[if lte IE 9]>
+<script src="assets/jquery-placeholder/jquery.placeholder.min.js"></script>
+<![endif]-->
+<script src="tmpl/social/assets/mobirise/js/script.js"></script>
+
+
+</body>
+</html>
