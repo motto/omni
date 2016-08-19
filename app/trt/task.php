@@ -1,20 +1,27 @@
 <?php
-namespace lib\task\trt;
+namespace app\trt;
 
 defined( '_MOTTO' ) or die( 'Restricted access' );
-trait Task_SetTask {
-    public function SetTask($tasknev='task'){
-  $task=$_GET[$tasknev] ?? 'alap';     
-  $task=$_POST[$tasknev] ?? $task; 
-  if(!$this->GetJog()){$task='joghiba';}
+trait Task_ADT_SetTask {
+    public function SetTask(){
+        $tasknev=$this->ADT['getID'] ?? 'task';
+        $task=$_GET[$tasknev] ?? 'alap';
+		$task=$_POST[$tasknev] ?? $task;
+		$jog=$this->ADT['jog'] ?? 'admin';
+		//echo $jog;
+		if(!\GOB::get_userjog($jog)){$task='joghiba';}
+        $this->ADT['task']=$task; 
+////echo 'hhhhhhhh'.$task;
 }}
 trait Task {
 
     public function task_futtat()
     {
         $task=$this->ADT['task'];
+        if(isset($this->ADT['TSK'][$task]['evalString']))
+        { eval($this->ADT['TSK'][$task]['evalString']); }
         
-        $trt=$this->trt();
+        $trt=$trt=$this->ADT['TSK'][$task]['trt'] ?? [];;
         
         $classnev=$this->ADT['appdNev'] ?? 'app'.$task;
 
@@ -73,16 +80,6 @@ trait Task {
         }else{$task='';}
     
         $this->ADT['task']=$task;
-    }
-    public function trt()
-    {   $res=[];
-        $task=$this->ADT['task'];
-        $trt=$this->ADT['TSK'][$task]['trt'] ?? [];
-     
-        foreach($trt as $t){
-          $res[]=\TRT::$$t ?? $t; 
-        }
-      return $res;  
     }
     
     /**

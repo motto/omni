@@ -24,7 +24,11 @@ ha üreset adunk meg csak az üreseket. tesztelve
         preg_match_all('/\<([^>]*?)([<" ])(' . $param . ') *= *"'.$value.'"([^<]*?)\>/', $html, $elemek);
         return $elemek[0];
     }
-
+static   public function getViewFromHTML($html,$nev) {
+         
+       preg_match('/<!--'.$nev.'-->(.*?)<!--\/'.$nev.'--\>/s', $html, $elemek);
+        return $elemek[1];
+    }
 static   public function getLTSelectedT($html){
   $elemT=  self::getElemT($html,'lt|ltdat');$res=[];
   foreach ($elemT as $elem) {
@@ -78,15 +82,21 @@ static   public function getDataSelectedT($html){
 	//print_r($res);
 	return $res;		
 }
+/**
+ //A $zarotagot '<' ki lehet cserélni (pl.:<!--valami-->) ha komplet dom-ot akarunk lecserélni
+ */
 static   public function changeInner($view,$elem,$data,$zarotag='<'){
-	$ujmezo=$elem.$data.$zarotag;
-	return preg_replace("/".$elem."([^`]*?)".$zarotag."/",$ujmezo, $view);
+	$ujmezo=$elem.$data;
+    $inner=self::getInner($view,$elem,$zarotag);
+	$csere=$elem.$inner;
+	//return preg_replace("/".$elem."([^`]*?)".$zarotag."/",$ujmezo, $view);
+	return str_replace($elem,$ujmezo, $view);
 }
 /**
 nem használt csak egy sort vált ki
  */
 static   public function ChangeElem($view,$elem,$ujelem){
-	return $view= str_replace($elem,$ujelem, $view); ;
+	return $view= str_replace($elem,$ujelem, $view); 
 }
 
 /**
@@ -194,6 +204,42 @@ static   public function ChangeData($view,$dataT,$dataTchar='|'){
 	return  $view;
 
 }
+
+static   public function ChangeDataPar($view,$dataT)
+{
+    $elemT=  self::getElemT($view,'dat|ltdat');
+    foreach ($elemT as $elem) 
+    {
+       // echo $elem.'---------';
+       //$oldelem=$elem;
+       $dat=self::getParamVal($elem,'dat');
+       //
+      // $datT= explode(',',$dat);
+       //foreach ($datT as $dt) 
+      // {
+           $dtT=explode('|',$dat);
+           $param=$dtT[0];
+
+           $key=$dtT[1];
+           
+           $value=$dataT[$key] ?? '';
+ // echo $param.'--' .$key.'---'.$value.'||||';
+           //A zárótagot '<' ki lehet cserélni (pl.:<!--valami-->) ha komplet dom-ot akarunk lecserélni
+           if($param=='inner')
+           {
+               $view= self::changeInner($view,$elem,$value,'<');
+           }
+           else 
+           {
+            $ujelem=self::setParam($elem,$param,$value,true) ;  
+            $view=str_replace($elem,$ujelem, $view);
+           }
+       //}
+       
+    }
+  //  echo 'oooooooooo';
+ return $view;   
+}
 //elem manipuláló*********************************************************  
 /**
 true val tér vissza ha a $textben van $str. $str lehet regex is.
@@ -204,11 +250,15 @@ static   public function haveSTR($text,$str) {
 	if(empty($match[0])){ $bool= false;}
 	return $bool;
 }
-static   public function getInner($html,$elem,$zarotag='<\/') {
+static   public function getInner($html,$elem,$zarotag='<') {
 	$match=[];
-	preg_match('/'.$elem.'([^`]*?)'.$zarotag.'/', $html, $match);
+	$val =self::getParamVal($elem, 'dat');
+	//preg_match('/'.$elem.'([^`]*?)'.$zarotag.'/', $html, $match);
+	preg_match('/dat="'.$val.'"([^`]*?)>([^`]*?)'.$zarotag.'/', $html, $match);
 	//if(empty($match[0])){ $bool= false;}
-	return $match[1];
+	//echo $match[0];
+	//print_r($match);
+	return $match[1] ?? '';
 }
 
 static   public function getParamBool($elem,$param) {
@@ -243,7 +293,7 @@ tesztelve: a $elem string $param paraméterét kicseréli $data értékkre
                	preg_match("/>|\/>/", $elem, $outT);
                	$veg=$outT[0];
                 $ujvalue = ' '.$param .'="'. $data. '" '.$veg;
-                $elem = preg_replace('/>|\/>/', $ujvalue, $elem);
+                $elem = preg_replace("/>|\/>/", $ujvalue, $elem);
                }
             } 
             else{

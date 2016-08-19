@@ -164,7 +164,7 @@ echo "Test_Dom:------------- ";
 //T_szotar::toArray();
 //T_szotar::getLTSelectedT();
 //T_szotar::getDataSelectedT();
-//T_szotar::getInner();
+T_szotar::getInner();
 //T_szotar::getElemT_fromParamT();
 //T_szotar::haveSTR();
 //T_szotar::tostr();

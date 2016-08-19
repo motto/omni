@@ -4,17 +4,23 @@ defined( '_MOTTO' ) or die( 'Restricted access' );
 trait View
 {
     public function View()
-    {	
+    {
+//echo '---------'; 
+//print_r($_POST);
     $task=$this->ADT['task'];
     $appdir=$this->ADT['appDir'] ?? 'app/'.\GOB::$app;
- 
+// echo $task;
     $view=$this->ADT['TSK'][$task]['view'];
     
 	//ha érvényes az aktuális templétben a $dir path akkor az lesz a $dir
 	if(is_file('tmpl/'.\GOB::$tmpl.'/'.$appdir.'/view/'.$view))
 	{$dir='tmpl/'.\GOB::$tmpl.'/'.$appdir.'/view';}
-	else{$dir=$appdir.'/view';}
+	else if(is_file('app/'.\GOB::$app.'/view/'.$view))
+	{$dir='app/'.\GOB::$app.'/view';}
+	else{$dir='app/'.$appdir.'/view';
 	
+	}
+
 	//ha vannak init fileok becsatolja őket
 	if(is_file($dir.'/init.php')){include $dir.'/init.php';}
 	if(is_file($dir.'/'.$task.'_init.php')){include $dir.'/'.$task.'_init.php';}
@@ -25,9 +31,11 @@ trait View
 	if(is_file($dir.'/'.$view))
 	{
 	$this->ADT['view']= file_get_contents( $dir.'/'.$view,true);
+
 	}
 	else{
 	    $this->ADT['view']=$view;
+	    
 	}
 }
     

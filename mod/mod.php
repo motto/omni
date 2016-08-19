@@ -1,42 +1,69 @@
 <?php
 namespace mod;
-use lib\html\FeltoltS;
-use mod\ikonsor\Ikonsor;
-use mod\login\Login;
-use mod\tabla\Tabla;
-use mod\zaszlo\Zaszlo;
 
 defined( '_MOTTO' ) or die( 'Restricted access' );
-class MOD
-{
-public static function zaszlo($param='')
-{
-   // include_once 'mod/zaszlo/zaszlo.php';
-    $zaszlo=new Zaszlo();
-    return $zaszlo->eng_hu();
-}
 
 
-public static function login($param='')
-    {
-       //  include_once 'mod/login/login.php';
-        $login=new Login();
-        $view=$login->result();
-        //$view=FeltoltS::LT($view,'ModLT');
-            return $view;
+
+class Mod 
+{
+    public $ADT=[]; 
+
+    public function __construct($parT = [],$iniclass=''){
+   
+       $this->modinit($parT,$iniclass);
+       $this->Mod();
+    
     }
-public static function ikonsor($ikonsorT)
-    {
-        //include_once 'mod/ikonsor/ikonsor.php';
-        $ob=new Ikonsor();
-       // $ob->mezok=$ikonok;
-        return $ob->result($ikonsorT);
+   static public function TRTinit($trtT=[],$baseTRTchangeT=[])
+    { 
+       //TRT tömb üres traitekkel felöltése (nem csinálnak semmit)
+        $resT = get_class_vars('\mod\Mod_EmpTRT');
+        $resT=array_merge ($resT,$trtT);
+        
+        //A TRT tömb felülírása a \TRT-vel (alapértékek) ha a $this->ADT['baseTRTchangeT'] nem üres
+        foreach ($baseTRTchangeT as $chTRT)
+        {
+            if (isset(\TRT::$$chTRT)){$resT[$chTRT]=\TRT::$$chTRT;}
+        
+        }
+     return $resT ;
+        
     }
-public static function tabla($tab_szerkT,$dataT)
-    { //var_dump($param);
-        //print_r($param);
-        //include_once 'mod/tabla/tabla.php';
-        $ob=new Tabla($tab_szerkT,$dataT);
-        return $ob->result();
+    public function modinit($parT,$iniclass)
+    {
+        $this->ADT['idT']=$this->ADT['dataT']['idT']=$_POST['idT'] ?? [];
+ 
+        //Az alapértékek betöltése a $iniclass osztálybóll
+        if($iniclass!=''){$this->ADT = get_class_vars($iniclass);}   
+        $this->ADT=array_merge ($this->ADT,$parT);  
+    }
+ 
+    public function Mod()
+    {
+        $this->AppIni();
+       //nyelvi tömb feltöltése
+       $this->SetLT();
+  
+        //futtatamdó task előállítása
+        $this->SetTask();//trt: getTask
+     //   $jog=$this->ADT['jog'] ?? 'admin';
+        
+      /*  if(! \GOB::get_userjog($jog))
+        {
+           $this->ADT['task']='joghiba';
+           $this->ADT['TSK']['joghiba'] ['trt'][]='\app\admin\trt\task\Joghiba';
+        }*/
+      
+        //appNev.$task osztály generálás futtatás
+        $this->Task();
+        
+        //A $this->ADT['view'] feltöltése modulokkal
+        $this->ChangeData();
+        
+        $this->ChangeMod(); 
+        
+        $this->ChangeLT();
+              
     }
 }

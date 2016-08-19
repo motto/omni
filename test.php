@@ -17,8 +17,11 @@ class GOBT{
 	static public  $resT;
 }
 
-$parT['cim']='menkuotto@gmail.com';$parT['Subject']='hhhhhhhhh';$parT['Body']='uzb uiz buizui';
-echo \mod\email\Email_S::Res($parT)['err'];
+//$html= file_get_contents('mod/media/view/media_full.html',true);
+//echo \lib\html\dom\Dom_S::getViewFromHTML($html,'thumb_base');
+
+//$parT['cim']='menkuotto@gmail.com';$parT['Subject']='hhhhhhhhh';$parT['Body']='uzb uiz buizui';
+//echo \mod\email\Email_S::Res($parT)['err'];
 //echo mod\ikon\Ikon_S::Ikon('del');
 //echo lib\db\DB::Count("SELECT * FROM userek");
 //$_SERVER['REQUEST_URI']='index.php';
@@ -35,7 +38,7 @@ echo \mod\email\Email_S::Res($parT)['err'];
 //include 'test/lib/base/t_base.php';
 //probák  nem tesztek!!!!!!!---------------------------------
 //include 'test/lib/html/t_html.php';
-//include_once 'test/lib/html/t_dom.php';
+include_once 'test/lib/html/t_dom.php';
 //include 'test/lib/base/p_file.php';
 //include 'test/lib/itemview/p_itemview.php'; 
 if(empty(GOBT::$resT)){echo "\n a tesztek sikeresen lefutottak!";}else{

@@ -20,7 +20,6 @@ public static $modNev='Tabla';
  */
 public static $getID='tab';
 public static $uniq=false;
-
 static public  $glyph=True; //ha false képeket használ    
 static public  $rendez_sor=true;    
 static public  $fejlec=true;

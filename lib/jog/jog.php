@@ -21,8 +21,9 @@ class Jog
                 $userjog[]='admin';
             }
 
-            return $userjog;
+            
         }
+        return $userjog;
     }
     public static function fromDB(){
 

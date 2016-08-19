@@ -27,12 +27,15 @@ spl_autoload_register('betolt2');
 alap trt tomb ha az applikáció taskjában vagy alap osztályában olyan szereplő trait itt megvan 
 akor innen tölti be. használja: app\trt\task\TASK
  */
-class TRT
-{
-    public static $LT = 'nem'; //Lt t ömb feltöltését végzi
-    public static $save = 'nem';
-    public static $view = 'nem';
-}
+trait Base_AppIni{use app\trt\Empty_AppIni;}
+trait Base_SetLT{use app\trt\Empty_AppIni;}
+trait Base_Joghiba{use app\admin\trt\task\Joghiba;}
+trait Base_SetTask{use app\trt\Task_ADT_SetTask;}
+trait Base_Task{use app\trt\Task;}
+trait Base_ChangeLT{use \lib\html\dom\trt\Dom_ChangeLT;}
+trait Base_ChangeData{use \lib\html\dom\trt\Dom_ChangeData;}
+trait Base_hangeModhTML{use \lib\html\dom\trt\Dom_ChangeModHTML;} //ChangeMod
+trait Base_ChangeModView{use \lib\html\dom\trt\Dom_ChangeModView;}//ChangeMod
 
 class CONF
 {
@@ -100,7 +103,7 @@ ha nincs $user_SQL ez alapján csinál. Csak az userek tábla mezői használhat
 
 class GOB
 { 
-	private static $userjog=Array();
+	private static $userjogT=Array();
 /**
 mindeféle paraméterek elhelyezése applikációknak ,modulok de a headT helyét is átvette
 js css og stb betöltése alapértelmezett kulcsok: $headT['head'],$headT['body'],$headT['bodyend']
@@ -149,11 +152,12 @@ ki kell vezetni!! szerepét a $logT veszi át aminek egyike altömbje lesz: $log
     public static $admin_mod='';
     
     public static function get_userjog($jogname){
-        if(in_array($jogname,self::$userjog)){return true;}
+      //  print_r(self::$userjogT);
+        if(in_array($jogname,self::$userjogT)){return true;}
         else{return false;}
     }
     public static function set_userjog(){
-        self::$userjog=\lib\jog\Jog::fromGOB();
+        self::$userjogT=\lib\jog\Jog::fromGOB();
     }
 
 }

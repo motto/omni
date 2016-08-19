@@ -1,126 +1,183 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-  <!-- <meta http-equiv="cache-control" content="no-cache" />
-     <link href="tmpl/flat/css/bootstrap.min.css" rel="stylesheet">
-    <link href="tmpl/flat/css/font-awesome.min.css" rel="stylesheet">
-    <link href="tmpl/flat/css/prettyPhoto.css" rel="stylesheet">
-   -->
-    <title>Admin</title>
- 
-
-   <link href="tmpl/admin/css/main.css" rel="stylesheet">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css">
-   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>   
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>Untitled</title>
+    <link rel="stylesheet" href="tmpl/admin/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="tmpl/admin/assets/css/Paralax-Hero-Banner.css">
+    <link rel="stylesheet" href="tmpl/admin/assets/css/Paralax-Hero-Banner1.css">
+    <link rel="stylesheet" href="tmpl/admin/assets/css/styles.css">
+     <script src="tmpl/admin/assets/js/jquery.min.js"></script>
+    <script src="tmpl/admin/assets/bootstrap/js/bootstrap.min.js"></script>
+   <!-- <script src="tmpl/admin/assets/js/Paralax-Hero-Banner.js"></script> --> 
     
 <script type="text/javascript"> 
+//var kepcsereid='';
 $(document).ready(function(){ 
+
+	$('.btn').tooltip({ html: true});
 	
-	$("#myModal").on("show.bs.modal", function(e) {
-		var wd=$(window).width();
-		var modalwd=$(window).width()*0.6;
-	    var link = $(e.relatedTarget);
-	    $(this).find(".modal-body").load(link.attr("href"));
-	   
-	});	
-	//$('[data-tg="tooltip"]').tooltip(); 
-	$('.btn').tooltip({ html: true}); 
+	$('body').on('hidden.bs.modal', '.modal', function () {
+	    $(this).removeData('bs.modal');
+	});
+			
 });
-</script>
-</head><!--/head-->
-<body>
-<style>
-    .btkep
-    {background-color: #2C3E50;border:none;color: white; }
-    table {
 
-        padding: 25px;
-        background-color:whitesmoke;
-        margin-left:5%;
-        margin-top:3%;
-        min-width:70% ;
+var medialink='index.php?app=modal&mod=media';
 
-        color: darkslategray;
-    }
-    th {
-        height: 50px;
-    }
-    table, th, td { padding: 5px;
-        border: 1px solid black;max-width:30%;
-    }
-</style>
+function dirchange(id) 
+{
+	//alert(medialink+'&dir='+id);
+	  $.get(medialink+'&dir='+id,function(data, status){
+		  data_betolt(data)  ;
+	  }
+	  ) ;
+	
+}
+function up() 
+{
+	//alert(medialink+'&dir='+id);
+	  $.get(medialink+'&vdir=up',function(data, status){
+		  data_betolt(data)  ;
+	  }
+	  ) ;
+	
+}
+function home() 
+{
+	//alert(medialink+'&dir='+id);
+	  $.get(medialink+'&vdir=home',function(data, status){
+		  data_betolt(data)  ;
+	  }
+	  ) ;
+	
+}
+function image_del(id) 
+{
+	
+	  $.get(medialink+'&med=del&did='+id,function(data, status){
+		  data_betolt(data)  ;
+	  }
+	  ) ;
+	
+}
+function newdir() 
+{
+	var addir = $("#newdir_input").val();
+	  $.get(medialink+'&med=newdir&addir='+addir , function(data, status){
+		  data_betolt(data)  ;
+	  }
+	  ) ;
+	
+}
+function link_betolt(pluszGET='',loadID='modalbase') 
+{
+	//alert(medialink+pluszGET);
+	$('#'+loadID).load(medialink+pluszGET); 
+		
+}
 
-<header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!-- <a class="navbar-brand" href="index.php"><img src="tmpl/flat/images/logo.png" alt="logo"></a>
-        </div>-->
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="index.php">Weblap</a></li>
-                <li><a href="index.php?app=admin&fget=user">Userek</a></li>
-                <li><a href="index.php?app=admin&fget=faucet">Faucet</a></li>
-                <li><a href="index.php?app=admin&fget=nyito">Nyitólap</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pénztár<i class="icon-angle-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="index.php?app=admin&fget=bejovo">Bejövő</a></li>
-                        <li><a href="index.php?app=admin&fget=szamlatortenet">Számlatörténet</a></li>
-                        <li><a href="index.php?app=admin&fget=egyenlegek">Egyenlegek</a></li>
+function data_betolt(data,loadID='modalbase') 
+{
+	$('#'+loadID).html(data); 
+		
+}
+function feltolt() 
+{
+	
+//$('#myModal').modal('hide');	
+ var form = $('.uploadform')[0];
+ //alert(form);
+ var formData = new FormData(form);
+ $.ajax({ 
+	    url : 'index.php?app=modal&mod=media&med=upload',
+	    type: "POST",
+	    data : formData,
+	    contentType: false,
+	    cache: false,
+	    processData:false,
+	    dataType : 'json',
+	    xhr: function(){
+	        //upload Progress
+	        var xhr = $.ajaxSettings.xhr();
+	        if (xhr.upload) {
+	            xhr.upload.addEventListener('progress', function(event) {
+	                var percent = 0;
+	                var position = event.loaded || event.position;
+	                var total = event.total;
+	                if (event.lengthComputable) {
+	                    percent = Math.ceil(position / total * 100);
+	                }
+	                //update progressbar
+	                $("#progress-wrp .progress-bar").css("width", + percent +"%");
+	                $( "#progress-wrp .status").text(percent +"%");
+	            }, true);
+	        }
+	        return xhr;
+	    },
+	    succes: function(msg){ 
+	    	link_betolt()  ;	 
+	      },
+	     error: function(){ 
+	    	 link_betolt()  ;
+	      }
+	});
 
-                        <li><a href="index.php?app=admin&fget=kifizetes">Kifizetés</a></li>
+}	
+	
+</script>    
+    
+  <!--|head|-->  
+</head>
 
-                    </ul>
-                </li>
-                <li><a href="index.php?app=admin&mod=login">Login</a></li>
-            </ul>
-        </div>
-    </div>
-</header><!--/header style="min-height:700px;"-->
-<section style="padding:10px;"  class=" midnight-blue">
-     <!--|content|-->
-</section><!--/#main-slider-->
-<footer id="footer" class="midnight-blue">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                &copy; 2016 <a target="_blank" href="#" title="sbt">Motto Framework</a>. All Rights Reserved.
+<body style="background-color:#404F5F">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header"><a class="navbar-brand navbar-link" href="#">Brand</a>
+                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
             </div>
-
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li class="active" role="presentation"><a href="#">First Item</a></li>
+                    <li role="presentation"><a href="#">Second Item</a></li>
+                    <li role="presentation"><a href="#">Third Item</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</footer><!--/#footer-->
+    </nav>
+  <section>  
+  <!--|content|-->  
+  </section>  
+  <!--  <div class="jumbotron hero-technology">
+        <h1 class="hero-title">Hero Technology</h1>
+        <p class="hero-subtitle">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+        <p><a class="btn btn-primary btn-lg hero-button" role="button" href="#">Learn more</a></p>
+    </div>-->
+    
+ <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-
-    <!-- Default bootstrap modal example -->
-<div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div id="modaldialog" class="modal-dialog ">
-    <div class="modal-content" >
+    <!-- Modal content-->
+    <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span style="color:red;font-size:36px;" aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"> -- </h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Select a File to Upload</h4>
       </div>
-      <div  class="modal-body">
-      
+      <div id="modalbase" class="modal-body">
+ 
       </div>
-      <div class="modal-footer">  
+      <div  class="modal-footer">  
       
     
       </div>
     </div>
   </div>
-</div>
-
+</div>   
+    
+    
+   
 </body>
+
 </html>

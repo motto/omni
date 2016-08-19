@@ -3,7 +3,7 @@ namespace mod\login;
 defined( '_MOTTO' ) or die( 'Restricted access' );
 
 class ADT{
-
+public static $jog='noname';
 //fontos--------------------------
 public static $captcha=false;
 /**

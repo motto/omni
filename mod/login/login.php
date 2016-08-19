@@ -11,8 +11,8 @@ azért kell associativ tömb hogy felül  írható legyen!
  */
 //$loginTRT['SetLT']='\lib\lang\trt\\'.\CONF::$LangMode.'\\'.\CONF::$LangForras.'\Set_SetLT';
 $loginTRT['SetLT']='\lib\lang\trt\single\tomb\Set_SetLT';
-$loginTRT['GetTask']='\lib\task\trt\Task_PG_GetTask';
-$loginTRT['Task']='\lib\task\trt\Task';
+$loginTRT['SetTask']='\app\trt\Task_ADT_SetTask';
+$loginTRT['Task']='\app\trt\Task';
 $loginTRT['ChangeLT']='\lib\html\dom\trt\Dom_ChangeLT';
 $loginTRT['ChangeData']='\lib\html\dom\trt\Dom_ChangeData';
 
@@ -33,7 +33,8 @@ class Login extends \loginbase
 	public function __construct($parT = []){
 		$this->ADT = get_class_vars('mod\login\ADT');
 		$this->ADT['TSK']=get_class_vars('mod\login\TSK');
-		$this->setADT($parT); 
+		//$this->setADT($parT); 
+		$this->ADT=array_merge ($this->ADT,$parT);
 		if($this->ADT['captcha']){
 		  $this->ADT['TSK']['regform']['trt'][]='mod\login\trt\Captcha';
 		  $this->ADT['TSK']['regform']['after']='Captcha';
@@ -42,15 +43,16 @@ class Login extends \loginbase
 		  $this->ADT['TSK']['regment']['ell']['captcha']['CodeEll']='"captcha_err"';
 		}
 	}
-	public function setADT($parT = []){
+/*	
+public function setADT($parT = []){
 		foreach ($parT as $name => $value)
 		{$this->ADT[$name]=$value;}
 	}
-
+*/
     public function Res($parT=[])
     {
        $this->ADT['LT']=\mod\login\LT::$hu;
-       $this->GetTask($this->ADT['getID']);//trt: getTask
+       $this->SetTask();//trt: getTask
   
         //modulnev+task osztály generálás futtatás
         $this->Task(); 
