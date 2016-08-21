@@ -220,7 +220,7 @@ static   public function ChangeDataPar($view,$dataT)
            $dtT=explode('|',$dat);
            $param=$dtT[0];
 
-           $key=$dtT[1];
+           $key=$dtT[1] ?? ' ';
            
            $value=$dataT[$key] ?? '';
  // echo $param.'--' .$key.'---'.$value.'||||';
@@ -231,7 +231,9 @@ static   public function ChangeDataPar($view,$dataT)
            }
            else 
            {
+//echo'$param:'.$param.', $value:'.$value;
             $ujelem=self::setParam($elem,$param,$value,true) ;  
+           // $ujelem='ujelem';
             $view=str_replace($elem,$ujelem, $view);
            }
        //}
@@ -286,20 +288,24 @@ tesztelve: a $elem string $param paraméterét kicseréli $data értékkre
  static   public function setParam($elem,$param,$data='',$forced=true) {
   
             preg_match('/([<" ])('.$param .' *= *)"([^`]*?)"/', $elem, $match);
-           
-           if (empty($match[0])) { 
+// print_r($match) ;          
+ //echo '---'.$match[0];          
+     if (empty($match[0])) { 
                if ($forced)
                {
-               	preg_match("/>|\/>/", $elem, $outT);
-               	$veg=$outT[0];
-                $ujvalue = ' '.$param .'="'. $data. '" '.$veg;
+               //	preg_match("/>|\/>/", $elem, $outT);
+               //	$veg=$outT[0];
+                $ujvalue = ' '.$param .'="'. $data. '" >';
                 $elem = preg_replace("/>|\/>/", $ujvalue, $elem);
                }
             } 
             else{
                 $ujvalue = $param .'="'. $data. '"';
-                $elem = str_replace( $match[2].'"'.$match[3].'"', $ujvalue, $elem); 
-            }                
+                //$elem = str_replace( $match[2].'"'.$match[3].'"', $ujvalue, $elem); 
+                $elem = preg_replace('/'.$param.'="([?]*)"/', $ujvalue, $elem);
+              //  $elem = preg_replace('/'. $param .'="([^`]*?)"/', $ujvalue, $elem);
+            } 
+      //      echo $elem;
         return $elem;
     }
 /**

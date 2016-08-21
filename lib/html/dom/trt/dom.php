@@ -44,7 +44,22 @@ trait Dom_ChangeData
        $this->ADT['view'] = \lib\html\dom\Dom_s::ChangeData($view, $dataT);  
     }
 }
+/**
+dat,ltdat paraméterben megadot parmétert cserél pl.: dat="value|adat" (value paramétert A dataT['adat'] értékre)
+ */
+trait Dom_ChangeDatPar
+{
 
+    public function ChangeData($view='', $dataT = [])
+    {
+        
+        if ($view == '') { $view = $this->ADT['view'] ?? '';}
+        if (empty($dataT)) { $dataT = $this->ADT['dataT'] ?? '';}
+    
+        $this->ADT['view'] = \lib\html\dom\Dom_s::ChangeDataPar($view, $dataT);
+
+    }
+}
 /**
  * ADT kompatibilis.<!--:modnev|obNev|getID'-->
  */

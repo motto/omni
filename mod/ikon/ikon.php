@@ -5,6 +5,7 @@ namespace mod\ikon;
 class ADT
 {
     //ikon
+public static $imagesize='24';    
 public static $noikon='noikon.png';  //Ha nincs az adott tasknak megfeleló kép
 public static $noglyph='none';       //Ha nincs az adott tasknak megfeleló glyph
 public static $obNev='ikon';
@@ -19,11 +20,12 @@ egyébként általában ugyanaz mint az obnev. a task csak simán a getElotag pl
 public static $getID='task';
 public static $size='32';
 public static $label=true;
-public static $glyph=true; //ha false képeket használ 
+public static $glyph=false; //ha false képeket használ 
 public static $trT=['lt_fromLT'];
-public static $iconDir='res/ico/16/'; //kell a végére: /
+public static $iconDirSmall='res/ico/16/';
+public static $iconDir='res/ico/32/'; //kell a végére: /
 public static $ikonT=[
-///'eye'=>['image'=>'noikon.png','glyph'=>'eye-open'],
+'eye'=>['image'=>'eye.png','glyph'=>'eye-open'],
 'none'=>['image'=>'noikon.png','glyph'=>'none'],    
 'up'=>['image'=>'up.png','glyph'=>'chevron-up','bgcolor'=>'blue'],
 'down'=>['image'=>'down.png','glyph'=>'chevron-down','bgcolor'=>'blue'],
@@ -90,7 +92,7 @@ public function imageIcon()
     $noimage=$this->ADT['noikon'] ?? 'noimage.png';
     $img=$this->ADT['ikonT'][$task]['image'] ?? $noimage;
 
-    return '<img class="moikon '.$class.'"
+    return '<img style="padding-bottom:8px;" class="moikon '.$class.' width="'.$this->ADT['imagesize'].'" height="'.$this->ADT['imagesize'].'"
             src="'.$this->ADT['iconDir'].$img.'"/>';
 }
 
@@ -119,7 +121,11 @@ class Ikon_Clikk extends Ikon
         {$label=$this->ADT['LT'][$task] ?? $task;  $label='</br>'.$label;}
         else{$label='';}
         
-        if(in_array($task,$this->ADT['confirmT'])){ $oncl='onclick="return confirmSubmit(\''.$this->ADT['LT'][$task.'_confirm'].'\')"';}
+        if(in_array($task,$this->ADT['confirmT'])){
+           // $oncl=' class="delconfirm" ';
+           // $oncl='onclick="return confirm(\''.$this->ADT['LT'][$task.'_confirm'].'\')"';
+            $oncl='onclick="$.confirm();"';
+        }
         else{$oncl='';} 
         
           $res['link']=$link;  
@@ -134,9 +140,9 @@ class Ikon_Clikk extends Ikon
     {
         
         $varT=$this->ikonVarT();
-        $res='<button class="btkep" type="submit" name="'.$this->ADT['getID'].'"
+        $res='<button class="btn btn-primary"  type="submit" name="'.$this->ADT['getID'].'"
         value="'.$this->ADT['task'].'" '.$varT['oncl'].'>'.$varT['icon'].$varT['label'].'</button>';
-    
+       // $res='<button class="btn btn-primary" href="'.$varT['link'].'"  '.$varT['oncl'].'>'.$varT['icon'].$varT['label'].'</button>';
         return $res;
     }
     public function linkIkon()
@@ -186,7 +192,17 @@ class Ikon_S
     }
     
 }
+class Ikon_pub_S
+{
+    public  static function Res($pub)
+    {
+        if($pub=='0')
+        {return 'res/ico/16/published.png';}
+        else{return 'res/ico/16/unpublished.png';}
 
+    }
+
+}
 class Ikon_Clikk_S
 { 
     public  static function Res($parT=[])

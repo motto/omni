@@ -5,13 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Untitled</title>
+ 
     <link rel="stylesheet" href="tmpl/admin/assets/bootstrap/css/bootstrap.min.css">
+ 
+     <script src="tmpl/admin/assets/js/jquery.min.js"></script>
+    <script src="tmpl/admin/assets/bootstrap/js/bootstrap.min.js"></script>
+   <!-- 
+   <script src="tmpl/admin/assets/js/Paralax-Hero-Banner.js"></script> 
+      
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">   
     <link rel="stylesheet" href="tmpl/admin/assets/css/Paralax-Hero-Banner.css">
     <link rel="stylesheet" href="tmpl/admin/assets/css/Paralax-Hero-Banner1.css">
     <link rel="stylesheet" href="tmpl/admin/assets/css/styles.css">
-     <script src="tmpl/admin/assets/js/jquery.min.js"></script>
-    <script src="tmpl/admin/assets/bootstrap/js/bootstrap.min.js"></script>
-   <!-- <script src="tmpl/admin/assets/js/Paralax-Hero-Banner.js"></script> --> 
+   
+   --> 
     
 <script type="text/javascript"> 
 //var kepcsereid='';
@@ -22,7 +29,18 @@ $(document).ready(function(){
 	$('body').on('hidden.bs.modal', '.modal', function () {
 	    $(this).removeData('bs.modal');
 	});
-			
+	
+	$('.btn').onclick().confirm({
+	    title: 'Confirm!',
+	    content: 'Simple confirm!',
+	    confirm: function(){
+	        $.alert('Confirmed!');
+	    },
+	    cancel: function(){
+	        $.alert('Canceled!')
+	    }
+	});
+	
 });
 
 var medialink='index.php?app=modal&mod=media';
@@ -133,21 +151,72 @@ function feltolt()
 </head>
 
 <body style="background-color:#404F5F">
+
+<style>
+.listakontener{
+border:solid 1px #302815;
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+border-radius: 8px;
+float:left;
+margin:3px;
+background-color:white;
+width:180px;
+height:260px;
+overflow:hidden;
+}
+.listaimg{
+
+width:150px;
+height:160px;
+}
+.lista_pubikon{
+width:24px;
+height:24px;
+}
+.thumbnev{
+padding-left:10px;
+}
+.ikon_button{
+ background-color:red;
+ color:white;
+}
+.listathumb{
+cursor:pointer;
+}
+
+.ikondiv{
+float:right;
+}
+
+
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
+h2{
+color:white;
+padding:20px;
+}
+
+</style>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="navbar-header"><a class="navbar-brand navbar-link" href="#">Brand</a>
+            <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.php">Home</a>
                 <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav">
-                    <li class="active" role="presentation"><a href="#">First Item</a></li>
-                    <li role="presentation"><a href="#">Second Item</a></li>
-                    <li role="presentation"><a href="#">Third Item</a></li>
+                    <li class="active" role="presentation"><a href="index.php?app=admin&iniF=userek">Userek</a></li>
+                    <li role="presentation"><a href="index.php?app=admin&iniF=email">Emailok</a></li>
+                    <li role="presentation"><a href="index.php?app=admin&iniF=omni/fajta">Fajták</a></li>
+                    <li role="presentation"><a href="index.php?app=admin&iniF=omni/fajtavar">Fajta változataok</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-  <section>  
+  <section> 
+  
   <!--|content|-->  
   </section>  
   <!--  <div class="jumbotron hero-technology">

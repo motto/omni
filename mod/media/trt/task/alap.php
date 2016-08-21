@@ -14,9 +14,7 @@ if(\GOB::get_userjog('admin')){ $rootdir=$this->ADT['admin_rootdir'];   }
 else{$rootdir=$this->ADT['user_rootdir'];} 
 
 $subdir=$_SESSION['subdir'] ?? '' ;
-//if(isset($_SESSION['subdir']) && is_dir($rootdir.'/'.$_SESSION['subdir']))
-//{$subdir=$_SESSION['subdir'] ;}
-//echo 'tt'.$subdir;
+$subdir_old=$subdir;  //ha nem érvénes leszu a subdir megállapítás
 
 if(isset($_GET['vdir']))
 {
@@ -34,28 +32,26 @@ else
     {
           if($subdir=='')
           {
-              if(is_dir($rootdir.'/'.$_GET['dir']))
-              { $subdir.='/'.$_GET['dir'];}
+              $subdir=$_GET['dir'];
           }
           else
           {
-             if(is_dir($rootdir.'/'.$subdir.'/'.$_GET['dir']))  
-             { $subdir.='/'.$_GET['dir'];}   
+             $subdir.='/'.$_GET['dir'];  
           } 
      }  
 }
-//echo'---------'. $subdir;
+
+
 if(is_dir($rootdir.'/'.$subdir)){$_SESSION['subdir']=$subdir;}
-//$_SESSION['subdir']=$subdir;
-//echo $rootdir.'/'.$subdir; 
-//echo'l';
+else{$subdir=$subdir_old;}
+
 if($subdir==''){ $path=$rootdir; }else{ $path=$rootdir.'/'.$subdir;}
 if(!is_dir($path)){$path=$rootdir;}
 
-$this->ADT['dir']=$path;
-//echo '000000000'.$this->ADT['dir'];
- }    
-}
+$this->ADT['dir']=str_replace('//', '/', $path) ;
+  
+}}
+
 trait Alap_Del{
     public function deldir($dir)
     {  
@@ -194,9 +190,7 @@ trait Alap_Lista{
         $res.= $this->ikon_thumb('fel','res/ico/up.png','up') ; 
         $res.= $this->ikon_thumb('Home','res/ico/home.png','home') ;
         foreach ($this->dirT as $file)
-        {
-            $res.= $this->dir_thumb($file) ;
-        }
+        { $res.= $this->dir_thumb($file) ;}
         
         foreach ($this->fileT as $file)
         {$res.= $this->kep_thumb($file) ;}

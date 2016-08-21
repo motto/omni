@@ -123,8 +123,8 @@ ha $test=true akkor nem ír be csak az sql-el tér vissza
     		$value_string2=rtrim($value_string,',');
     		$sql="INSERT INTO $tabla ($mezo_string2) VALUES ($value_string2)";
     		//visszatérési érték----------------------------
-//echo 'ggggggggg '. $sql;
-    		if($test){$result=$sql;}
+echo 'ggggggggg '. $sql;
+ 		if($test){$result=$sql;}
     		else{$result=DBA::beszur($sql);}
     	}
     	return $result;

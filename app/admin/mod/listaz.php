@@ -7,6 +7,7 @@ class Listaz
         $this->ADT['sql']='';
         $this->ADT=array_merge ($this->ADT,$parT);
     }
+
     public function Listaz()
     {  
         

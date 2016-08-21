@@ -7,12 +7,14 @@ defined( '_MOTTO' ) or die( 'Restricted access' );
  azért kell associativ tömb hogy felül  írható legyen!
  */
 //$loginTRT['SetLT']='\lib\lang\trt\\'.\CONF::$LangMode.'\\'.\CONF::$LangForras.'\Set_SetLT';
+$TRT['AppIni']='\app\admin\trt\task\AppIni';
+
 $TRT['SetLT']='\lib\lang\trt\single\tomb\Set_SetLT';
-$TRT['GetTask']='\lib\task\trt\Task_PG_GetTask';
+$TRT['SetTask']='\app\trt\Task_ADT_SetTask';
 //$TRT['GetJog']='\lib\task\trt\Task_PG_GetTask';
-$TRT['Task']='\lib\task\trt\Task';
+$TRT['Task']='\app\trt\Task';
 $TRT['ChangeLT']='\lib\html\dom\trt\ Dom_HTML_ChangeLT';
-$TRT['ChangeData']='\lib\html\dom\trt\Dom_ChangeData';
+$TRT['ChangeData']='\lib\html\dom\trt\Dom_ChangeDatPar';
 $TRT['ChangeMod']='\lib\html\dom\trt\Dom_ChangeModHTML';
 /**
 az alaptask tábla szerkezete lehet több is a TSK osztály mgfelelő taskjához kellbeszúrni
@@ -42,7 +44,7 @@ class ADT{
      ide kell a nyelvi elemeket beírni
      */
     public static $LT=[];
-    public static $paramT=[];
+  public static $paramT=['Tabla'=>['paramT'=>['Ikon'=>['imagesize'=>'16']]]];
 
 } 
 
@@ -58,8 +60,8 @@ class TSK{
     static public $unpub=['trt'=>['app\admin\trt\task\Pub'],'resfunc'=>'unpub','next'=>'alap'];
     static public $del=['trt'=>['app\admin\trt\task\Del'],'next'=>'alap'];
    // static public $joghiba=['trt'=>['app\admin\trt\task\Joghiba']];
-    static public $email=['trt'=>['app\admin\trt\task\View','app\admin\EvalFunc'],'view'=>'email_form.html',
-        'resfunc'=>'View','before'=>'evalfunc',
+    static public $email=['trt'=>['app\admin\trt\task\View'],'view'=>'email_form.html',
+        'resfunc'=>'View',
         'evalSTR'=>'$_SESSION[\'idT\']=$_POST[\'idT\']; $this->ADT[\'dataT\'][\'fromnev\']=\CONF::$fromnev;
         $this->ADT[\'dataT\'][\'setfrom\']=\CONF::$mailfrom;'
         
@@ -79,6 +81,7 @@ class TSK{
 //
 ADT::$paramT['Ikon_ClikkSor']['ikonsorT']=['del','pub','unpub','email'];
 ADT::$paramT['Ikon_ClikkSor']['getID']='task';
+ADT::$paramT['Ikon_ClikkSor']['imagesize']='35';
 ADT::$paramT['Tabla']['dataszerkT']=['chk'=>['nocim'=>true,'func'=>'checkbox_mezo'],'pub'=>['nocim'=>true,'func'=>'pub_mezo'],'username'=>[],'email'=>[]];
 ADT::$paramT['Pagin']['limit']='10';
 \GOB::$tmpl='admin';

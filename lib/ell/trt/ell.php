@@ -15,17 +15,22 @@ az LT tömböt már előtte fel kell tölteni! onnan veszi a hiba üzenetet
 trait Ell{
 public $val='';	
 
-public  function Ell($get=false)
+public  function Ell()
 {	
 $task=$this->ADT['task'];
 $ellT=$this->ADT['TSK'][$task]['ell'];
 
 foreach ($ellT as $valnev=>$param)
 {
-    $valbool=true;
+    $valbool=true;$res['bool']=true;
     $value='nincsilyenvalue';
-    if($get && isset($_GET[$valnev])){$value=$_GET[$valnev] ;}
+    if(substr($valnev, 0,4)=='GET_'){
+ //      echo '-+********'.substr($valnev,4)
+        $valnev=substr($valnev,4);
+       $value=$_GET[$valnev] ?? 'nincsilyenvalue' ;}
+//echo $value.'-+********'.substr($valnev,4);
     if(isset($_POST[$valnev])){$value=$_POST[$valnev] ;}
+    
 	if($value!='nincsilyenvalue')
 	{
 	    $this->val=$value;
@@ -42,8 +47,14 @@ foreach ($ellT as $valnev=>$param)
     		}
     		else
     		{
-    			if($par!=''){eval('$res=$this->'.$func.'('.$par.');');}
-    			else{eval('$res=$this->'.$func.'();');}		
+    		    if($func=='nincsEll'){ $this->ADT['SPT'][$valnev]=$this->val;
+    		    echo $valnev.'---------'.$this->val;
+    		    }
+    		    else{      
+        		    if($par!=''){eval('$res=$this->'.$func.'('.$par.');');}
+        			else{eval('$res=$this->'.$func.'();');}	 
+    		    }
+    				
     		} 
     		
     		if(!$res['bool'])

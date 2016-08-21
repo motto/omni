@@ -42,8 +42,8 @@ static public $regexT=[
 			'MIN_MAX_UJ' =>'/^([a-záéíóöőúüűA-ZÁÉÍÓÖŐÚÜŰ0-9.,?!]){<<min>>,<<max>>}$/siu',
 			'MIN'=>'/^.{<<min>>,}$/',
 			'MAX'=>'/^.{1,<<max>>}$/',
-			'HU_SZO'=>'/^[a-zA-Z\déáűúőóüöÁÉŰÚŐÓÜÖ]+$/',  // eng_szo plusz ékezetesek
-			'HU_TOBB_SZO'=>'/^[a-zA-Z\d éáűúőóüöÁÉŰÚŐÓÜÖ]+$/', //eng_tobb_szo plusz ékezetesek
+			'HU_SZO'=>'/^[a-zA-Z\d éáűíúőóüöÁÉŰÚÍŐÓÜÖ]+$/u',  // eng_szo plusz ékezetesek
+			'HU_TOBB_SZO'=>'/^[a-zA-Z\d éáűúíőóüöÁÉŰÚ<ŐÓÜÖ]+$/u', //eng_tobb_szo plusz ékezetesek
 	
 			'MAIL'=>'/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/',//1 ha email
 			//tesztelve---------------
@@ -52,7 +52,7 @@ static public $regexT=[
 			'MIN_MAX_UJ'=>'/^.{<<min>>,<<max>>}$/u',//magyar karaktereket is figylembe veszi
 			'MIN6_MAX20'=>'/^.{6,20}$/u',//jelszónál pl
 			'MAIL'=>'/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/',//1 ha email
-			'HU_TEXT'=>'/^[a-zA-Z\d \!\"\?\.\:\(\)éáűúőóüöÁÉŰÚŐÓÜÖ]+$/',//ures stringnél is hibát jelez!!!
+			'HU_TEXT'=>'/^[a-zA-Z\d \!\"\?\.\:\(\)éáűíúőóüöÁÉŰÚÍŐÓÜÖ]+$/u',//ures stringnél is hibát jelez!!!
 			//'MIN_MAX_UJ' =>'/^([a-záéíóöőúüűA-ZÁÉÍÓÖŐÚÜŰ0-9.,?!]){<<min>>,<<max>>}$/siu',
 			//kereso------------------------
 			'DIV'=>'#<div[^>]*>(.*?)</div>#', //le kell ellenőrizni

@@ -15,6 +15,8 @@ class Mod
        $this->Mod();
     
     }
+    
+    /*
    static public function TRTinit($trtT=[],$baseTRTchangeT=[])
     { 
        //TRT tömb üres traitekkel felöltése (nem csinálnak semmit)
@@ -29,7 +31,7 @@ class Mod
         }
      return $resT ;
         
-    }
+    }*/
     public function modinit($parT,$iniclass)
     {
         $this->ADT['idT']=$this->ADT['dataT']['idT']=$_POST['idT'] ?? [];

@@ -40,17 +40,16 @@ static public  $cssFile='';//elérési utat kell megadni ha sját css-akarunk
 static public  $css='';
 //public static $trT=['lt_fromLT'];
 public static $iconDir='res/ico/16';
-public static $imagesT=[''=>'','unpub'=>''];
-public static $glyphT=[''=>''];
 public static $LT=['up'=>'Fel','down'=>'Le','pub'=>'Pub','unpub'=>'Unpub','del'=>'Töröl'];
 public static $paramT=['ikon'=>[
- 'size'=>'32',   
+ 'imagesize'=>'38',  
+ //'glyph'=>true,
 'ikonT'=>[
 'up'=>['image'=>'up.png','glyph'=>'chevron-up','bgcolor'=>'blue'],
 'down'=>['image'=>'down.png','glyph'=>'chevron-down','bgcolor'=>'blue'],  
 'pub'=>['image'=>'published.png','glyph'=>'ok','color'=>''],     
 'unpub'=>['image'=>'unpublished.png','glyph'=>'remove','color'=>''],    
-'eye'=>['image'=>'noikon.png','glyph'=>'eye-open','color'=>'red']      
+'eye'=>['image'=>'eye.png','glyph'=>'eye-open','color'=>'red']      
 ]]];
 }
 
@@ -116,7 +115,7 @@ public $ADT=[];
 
     public function mezo($data="")
     {
-        $html="<td>".$data."</td>";
+        $html="<td>". $data."</td>";
         return $html;
     }
 /**
@@ -131,9 +130,10 @@ lehet több egyforma index is! a cimet határozza meg, nem a mezőnevet.
         
         foreach($this->ADT['dataszerkT'] as $cim=> $mezotomb)
         {
-            $data=''; 
+             
             $key=$mezotomb['mezo'] ?? $cim;
-            if(isset($datasor[$key])) {$data=$datasor[$key];}
+            $data=$datasor[$key] ?? ' ';
+            
 			if(isset($mezotomb['func'])) 
 			{
 			   $evalpar=$mezotomb['funcEvalparam'] ?? [];
@@ -141,29 +141,58 @@ lehet több egyforma index is! a cimet határozza meg, nem a mezőnevet.
 			        $func=$mezotomb['func'];
 			        $data=$this->$func($key,$datasor,$evalpar);   
 			}
-
+            else{
+              $data=substr($data, 0,30);
+            }    
             $html.=$this->mezo($data);
         }
         $html.='</tr>';
         return $html;
     }
     public function fejlec()
-    {
-        $html='<tr class="trfejlec" style="background-color:blue; color:white;">';
+    { 
+        $css=<<<css
+<style>        
+     table {
+
+        padding: 25px;
+        background-color:whitesmoke;
+        margin-left:5%;
+        margin-top:3%;
+        min-width:70% ;
+
+        color: darkslategray;
+    }
+    .trfejlec{
+        background-color: royalblue;
+        color: white; 
+    }
+    th {
+        height: 50px;
+    }
+    table, th, td { padding: 5px;
+        border: 1px solid black;max-width:30%;
+    }     
+</style>        
+css;
+        $html=$css;
+        $html.='<tr class="trfejlec">';
+       // $html='<tr class="trfejlec" >';
        // if($this->ADT['checkbox']){$html.='<td></td>';}
        // if($this->ADT['pubikon']){$html.='<td></td>';}
         foreach($this->ADT['dataszerkT']  as $mezonev => $mezotomb)
-        {
-           if(isset($mezotomb['nocim'])){ $mezonev='';}
+        { 
+           $onclick='';
+           if(isset($mezotomb['nocim'])){ $mezocim=' ';}
            else{
-           $mezonev=$mezotomb['cim'] ?? $mezonev;
-           $mezonev=$this->ADT['LT'][$mezonev] ?? $mezonev;
+           $mezocim=$mezotomb['cim'] ?? $mezonev;
+           $mezocim=$this->ADT['LT'][$mezonev] ?? $mezocim;
            if(!isset($mezotomb['noorder'])){ $mezonev.=' '.$this->orderikon($mezonev);}  
+           //if(!isset($mezotomb['noorder'])){ $onclick='onclick="tab_order(\''.$mezonev.'\')" ';}
            }
-           
-           
-           $html.=$this->mezo($mezonev);
-           
+           //$tr='<button class="btn btn-primary" '.$onclick.' >'.$mezocim.'</button>'; 
+           //$html.=$this->mezo($tr);
+           $html.=$this->mezo($mezocim);
            
         }
         $html.="</tr>";
@@ -171,16 +200,22 @@ lehet több egyforma index is! a cimet határozza meg, nem a mezőnevet.
     }
 
     public function Res()
-    {
-        $html='<table>';
-        $html.=$this->fejlec();
-       // $html.=$this->rendez_sor();
-        foreach($this->ADT['dataT'] as $datasor)
-        {
-             $html.=$this->sor($datasor);
-
+    { 
+        if(empty($this->ADT['dataT']))
+         {$html='<h3>A táblázat nem tartalmaz adatokat!<h3>';}
+         else
+         {
+            $html='<table>';
+            $html.=$this->fejlec();
+           // $html.=$this->rendez_sor();
+            foreach($this->ADT['dataT'] as $datasor)
+            {
+                 $html.=$this->sor($datasor);
+    
+            }
+            $html.='</table>';   
         }
-        $html.='</table>';
+       
         return $html;
     }
 }

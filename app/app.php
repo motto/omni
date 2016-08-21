@@ -28,20 +28,16 @@ class App extends \AppBase
  
     public function App()
     {
+        //több task által használt alap értékek ,illetve az adott task 
+        //környezet függő értékei
+        $this->AppIni();
+        
         //nyelvi tömb feltöltése
         $this->SetLT();
    
-        //futtatamdó task előállítása
+        //futtatamdó task előállítása és az ADT-be írása
         $this->SetTask();//trt: getTask
         
-      /*  $jog=$this->ADT['jog'] ?? 'admin';
-        
-        if(! \GOB::get_userjog($jog))
-        {
-           $this->ADT['task']='joghiba';
-           $this->ADT['TSK']['joghiba'] ['trt'][]='\app\admin\trt\task\Joghiba';
-        }*/
-      
         //appNev.$task osztály generálás futtatás
         $this->Task();
         //A $this->ADT['view'] feltöltése modulokkal

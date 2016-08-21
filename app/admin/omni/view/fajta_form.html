@@ -8,17 +8,36 @@ $('#kep').val(id);
 }
 
 </script>
+<style>
+h2{
+color:white;
+padding:20px;
+}
+.err_div{
+color:red;
+font-size:18px;
+padding:10px;
+}
+</style>
+ <center><h2 lt="lapcim"></h2></center>
+ <div class="row"><div class="col-sm-8 col-sm-offset-2" >
+ <div class="err_div" lt="err" ></div>
+<div class="alert_div"lt="alert" ></div>
+<div class="info_div"  lt="info" ></div>
+</div> </div> 
+ 
+<form    method="post"  >
 <div class="row">
     <div class="col-sm-4 ">
-	    <div class="col-sm-6 col-sm-offset-5"" >
-	  	  <img id="img" src="" width="200" height="205"></img>
+	    <div class="col-sm-6 col-sm-offset-6" >
+	  	  <img id="img" src="res/ico/noimage.jpg" dat="src|kep" width="200" height="205"></img>
 	    </div>
     </div>
     
-     <div class="col-sm-8 ">
+     <div class="col-sm-7 ">
    		 <div class="form-group col-sm-8">
    		 	<div style="padding:0;" class="col-sm-9">
-    		<input type="text" id="kep" name="kep" class="form-control" required="required" placeholder="Tárgy">
+    		<input type="text" id="kep" dat="value|kep" name="kep" class="form-control" required="required" placeholder="Kép elérési útja. lehet link is">
    			</div>
    			 <div class="col-sm-3">
     		<button id="kepcsere" onclick="link_betolt('&dir='+start_dir,'modalbase');" class="btn btn-primary mmm"  data-toggle="modal" data-target="#myModal">
@@ -28,10 +47,10 @@ $('#kep').val(id);
    		 </div>
    		 
     	 <div class="form-group col-sm-8 ">
-    		<input type="text" id="kep" name="kep" class="form-control" required="required" placeholder="Tárgy">
+    		<input type="text" id="nev" dat="value|nev"  name="nev" class="form-control" required="required" placeholder="Név">
    		 </div>
    		  <div class="form-group col-sm-8">
-    		<textarea class="form-control" rows="4" ></textarea>
+    		<textarea class="form-control" rows="4" dat="inner|intro" name="intro" placeholder="Rövid leírás">Rövid leírás</textarea>
    		 </div>
     </div>
     
@@ -41,11 +60,14 @@ $('#kep').val(id);
 
     </div>
 <div class="row">   
-      <div form-group  class="col-sm-7 col-sm-offset-2"" >
-	  	 <textarea class="form-control" rows="8" ></textarea>
-	    <button type="submit" name="task" value="mailkuld" lt="send" class="btn btn-primary ">küld</button>
-        <button type="button" name="task" value="alap" lt="cancel" onclick=" beszur() ;" class="btn btn-primary">beszur</button>
+      <div  style="padding-right:50px;" class="form-group col-sm-7 col-sm-offset-2" >
+	  	 <textarea name="text"  dat="inner|text" title="Ismertető" placeholder="Ismertető" class="form-control" rows="8" >Ismertető</textarea>
+	  	 </div>
+	  	
+	  	 <div   class="form-group col-sm-7 col-sm-offset-3" >
+	    <button type="submit" name="task" value="save" lt="save" class="btn btn-primary ">Ment</button>
+        <a  href="index.php?app=admin&iniF=omni/fajta"  lt="cancel"  class="btn btn-primary">Mégsem</a>
 	    
 	    </div>
 </div>
-
+</form>

@@ -1,5 +1,5 @@
 <?php
-namespace mod\login\trt\task;
+namespace app\admin\trt\task;
 
 defined('_MOTTO') or die('Restricted access');
 // LT: Save_succes,database_err
@@ -9,24 +9,24 @@ class Save_S{
         $id=$ADT['idT'][0] ?? 0;
         $task=$ADT['task'];
         $ADT['saveRes']=true;
-        if(isset($ADT['TSK'][$task]['noSave']))
+        if(isset($ADT['mentmezok']))
         {
-          foreach($ADT['SPT'] as $key=>$value)
+          foreach($ADT['mentmezok'] as $mezo)
           {
-               if(!in_array($key,$ADT['TSK'][$task]['noSave']))
-               {      
-                $saveT[$key]=$value; 
-               }  
+               $value= $ADT['SPT'][$mezo] ?? '';  
+                $saveT[$mezo]=$value; 
           }
         }else{$saveT=$ADT['SPT'];}
         
         if($id==0)
         {
+ //print_r($saveT);
          $beszurtid=\lib\db\DBA::beszur_tombbol($ADT['tablanev'],$saveT);
             if($beszurtid==0)
             {
                 $ADT['saveRes']=false;
-                $ADT['LT']=\lib\base\TOMB::langTextToT('err',$err,$ADT['LT']);               
+                $ADT['LT']=\lib\base\TOMB::langTextToT('err',$err,$ADT['LT']); 
+                //print_r($err);
             }
            else{$ADT['id']=$beszurtid;}    
         }
@@ -52,8 +52,8 @@ public function Save_base($hibaTask,$info)
         
 
         if ($this->Ell()) {
-
-            $this->ADT=\mod\login\trt\task\Save_S::SaveFromSPT($this->ADT) ;
+    
+            $this->ADT=\app\admin\trt\task\Save_S::SaveFromSPT($this->ADT) ;
              
             if ($this->ADT['saveRes']) {
                  
@@ -67,12 +67,12 @@ public function Save_base($hibaTask,$info)
 }
 
 trait Save{ 
-use \mod\login\trt\task\Save_base;
+use \app\admin\trt\task\Save_base;
 
 public function Save()
 {
-    $this->Save_base('form','Save_succes');
-
+    $this->Save_base('edit','Save_succes');
+//print_r( $this->ADT['SPT']);
 }
 
 }
