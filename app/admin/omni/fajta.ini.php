@@ -56,7 +56,7 @@ class ADT{
     public static $idT=[];
     public static $tablanev='fajta';
     public static $ellerr=true;
-    public static $mentmezok=['nev','kep','intro','text'];
+    public static $mentmezoT=['nev','kep','intro','text'];
     /**
      a task trait-nek ha nins a tasknak megfelelő funkciója ilyennel kell rendelkezni (felülírható)
      */
@@ -83,8 +83,11 @@ class TSK{
     static public $pub=['trt'=>['app\admin\trt\task\Pub'],'next'=>'alap','resfunc'=>'Pub',];
     static public $unpub=['trt'=>['app\admin\trt\task\Pub'],'resfunc'=>'unpub','next'=>'alap'];
     static public $del=['trt'=>['app\admin\trt\task\Del'],'resfunc'=>'Del','next'=>'alap'];
-    static public $joghiba=['trt'=>['app\admin\trt\task\Joghiba'],'resfunc'=>'Joghiba'];
-    static public $save=['trt'=>['app\admin\trt\task\Save'],'resfunc'=>'Save','next'=>'alap'];
+   // static public $joghiba=['trt'=>['app\admin\trt\task\Joghiba'],'resfunc'=>'Joghiba'];
+    static public $save=['trt'=>['app\admin\trt\task\Save'],
+        'resfunc'=>'Save','next'=>'alap'
+        
+    ];
 
 }
 

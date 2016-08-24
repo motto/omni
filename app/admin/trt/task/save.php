@@ -9,9 +9,11 @@ class Save_S{
         $id=$ADT['idT'][0] ?? 0;
         $task=$ADT['task'];
         $ADT['saveRes']=true;
-        if(isset($ADT['mentmezok']))
+        $mentmezoT=$ADT['mentmezoT'] ?? [];
+        $mentmezoT=$ADT['TSK'][$task]['mentmezoT'] ?? $mentmezoT;
+        if(!empty($mentmezoT))
         {
-          foreach($ADT['mentmezok'] as $mezo)
+          foreach( $mentmezoT as $mezo)
           {
                $value= $ADT['SPT'][$mezo] ?? '';  
                 $saveT[$mezo]=$value; 

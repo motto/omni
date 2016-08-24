@@ -5,11 +5,7 @@ defined( '_MOTTO' ) or die( 'Restricted access' );
 class ADT{
 public static $jog='noname';
 //fontos--------------------------
-public static $captcha=false;
-/**
-confirm email küldés.
- */
-public static $emailConfirm=true;
+public static $captcha=true;
 /**
 az ellenőrző függvény false-ra állítja ha hibát talál
  */
@@ -74,7 +70,8 @@ static public $mailconfirm=['trt'=>['mod\login\trt\task\Alap']];
 static public $regment=
 [
 'resfunc'=>'Save_Reg',   
-'trt'=>['mod\login\trt\task\Save_Reg'],	
+'trt'=>['mod\login\trt\task\Save_Reg'],
+'mentmezoT'=>['fajtaid','nev','kep','intro','text'],    
 'next'=>'alap',		
 'ell'=>[]
 ];

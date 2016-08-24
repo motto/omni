@@ -83,14 +83,15 @@ public function Save_Reg()
             $this->ADT['beszurtid']=$res['id'];
             
             if(\CONF::$autopub=='igen'){$info='reg_kesz';}
-            if(\CONF::$autopub=='email'){$info='reg_kesz_email_aktival';}
+            if(\CONF::$autopub=='email'){ $this->Email() ; $info='reg_kesz_email_aktival'; }
             if(\CONF::$autopub=='nem'){$info='reg_kesz_admin_aktival';}
             
-            if($this->ADT['emailConfirm']){$this->Email() ;} 
+          //  if($this->ADT['emailConfirm']){$this->Email() ;} 
             $this->ADT['LT'] =\lib\base\TOMB::langTextToT('info',$info,$this->ADT['LT']);
         }
         else{\lib\base\TOMB::langTextToT('err','database_err',$this->ADT['LT']);}
     }
+    else {$this->ADT['TSK']['regment']['next']='regform';}
 }
 }
 trait Save_passwd{

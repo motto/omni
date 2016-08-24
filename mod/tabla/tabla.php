@@ -10,6 +10,7 @@ class ADT{
 egyben a tasknév is ha az uniq=true a constructor ellnőrzi  GOB::modT-ben és sorszámozza
  */
 static public  $obNev='tab';
+static public  $jog='noname';
 /**
  elérési utaknál kelhet
  */

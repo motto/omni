@@ -7,6 +7,7 @@ class ADT{
 az ellenőrző függvény false-ra állítja ha hibát talál
  */
 public static $ellerr=true;
+public static $jog='user';
 public static $appDir='mod/login';
 public static $task='alap';
 public static $tablanev='userek';

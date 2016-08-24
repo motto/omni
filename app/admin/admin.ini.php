@@ -5,7 +5,7 @@ defined( '_MOTTO' ) or die( 'Restricted access' );
 
 \GOB::$tmpl='admin'; 
 $iniF=$_GET['iniF'] ?? 'userek';
-echo $iniF;
+
 if(is_file('app/admin/'.$iniF.'/'.$iniF.'.ini.php'))
 {include 'app/admin/'.$iniF.'/'.$iniF.'.ini.php';}
 else

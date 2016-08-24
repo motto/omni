@@ -66,7 +66,7 @@ class CONF
     /**
 ha false nem küld levelet csak beirja a testemail táblába 
      */
-    public static $email=false;  
+    public static $email=true;  
 /**
 igen: pub automatikusan, email: mailos konfirmációkor, nem: admin által állítódik nullára
  */
@@ -111,12 +111,7 @@ js css og stb betöltése alapértelmezett kulcsok: $headT['head'],$headT['body'
   cseréli a tömbértékekből generált stringre
    */  
 	public static $paramT=[];
-	public static $lang='';
-/**
-tmpl inicializálásra modulok is tehetik ide a szótáraikat ha nem akarják külön betölteni
-lib\html\dom\trt\Dom_HTML_ChangeLT innen tölti fel Aa GOB::$HTML-t AZ ADT['LT']-vel felülrja,kiegészíti
- */	
-	public static $LT=''; 
+	public static $lang=''; 
 	public static $tmpl='';
 	public static $app='';
 	public static $appdir='';
@@ -131,7 +126,11 @@ ide irányítunk minden rendszerkiiratást err,alert,info
  */   
     public static $echoT=[];
     public static $logT=[];
-    
+    /**
+     tmpl inicializálásra modulok is tehetik ide a szótáraikat ha nem akarják külön betölteni
+     lib\html\dom\trt\Dom_HTML_ChangeLT innen tölti fel Aa GOB::$HTML-t AZ ADT['LT']-vel felülrja,kiegészíti
+     */
+    public static $LT='';
  /**
 ki kell vezetni!! szerepét a $logT veszi át aminek egyike altömbje lesz: $logT['hiba']
   */   

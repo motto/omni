@@ -6,7 +6,7 @@ class ADT{
 
     //fontos--------------------------
     public static $jog='admin';
-    public static $html='modal.html';
+    public static $html='<!--|content|-->';
   //  public static $task='alap';
   //  public static $resfunc='Alap';
     public static $view='';

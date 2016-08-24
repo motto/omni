@@ -8,6 +8,7 @@ class ADT
 public static $imagesize='24';    
 public static $noikon='noikon.png';  //Ha nincs az adott tasknak megfeleló kép
 public static $noglyph='none';       //Ha nincs az adott tasknak megfeleló glyph
+public static $buttonclass='btn btn-primary';
 public static $obNev='ikon';
 /**
 elérési utaknál kelhet
@@ -121,15 +122,24 @@ class Ikon_Clikk extends Ikon
         {$label=$this->ADT['LT'][$task] ?? $task;  $label='</br>'.$label;}
         else{$label='';}
         
-        if(in_array($task,$this->ADT['confirmT'])){
+        $class=$this->ADT['buttonclass'] ?? '';
+       if(in_array($task,$this->ADT['confirmT']))
+       { $class.=' confirmdelete';}
+       
+        if($class!='')
+        {$classparam='class="'.$class.'"';}
+        else{$classparam='';}
+        
+      //  if(in_array($task,$this->ADT['confirmT'])){
            // $oncl=' class="delconfirm" ';
            // $oncl='onclick="return confirm(\''.$this->ADT['LT'][$task.'_confirm'].'\')"';
-            $oncl='onclick="$.confirm();"';
-        }
-        else{$oncl='';} 
+           $oncl='';
+       // }
+       // else{$oncl='';} 
         
           $res['link']=$link;  
-          $res['oncl']=$oncl;  
+         $res['oncl']=$oncl; 
+          $res['class']=$classparam;
           $res['label']=$label;
           $res['icon']=$icon;
           
@@ -140,7 +150,7 @@ class Ikon_Clikk extends Ikon
     {
         
         $varT=$this->ikonVarT();
-        $res='<button class="btn btn-primary"  type="submit" name="'.$this->ADT['getID'].'"
+        $res='<button '. $varT['class'].'  type="submit" name="'.$this->ADT['getID'].'"
         value="'.$this->ADT['task'].'" '.$varT['oncl'].'>'.$varT['icon'].$varT['label'].'</button>';
        // $res='<button class="btn btn-primary" href="'.$varT['link'].'"  '.$varT['oncl'].'>'.$varT['icon'].$varT['label'].'</button>';
         return $res;

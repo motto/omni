@@ -1,0 +1,13 @@
+Szia. Gondoltam kifüggetlenítem a telefonomat ingyen. Az alábbi mûveletet egy Samsung Galaxy Mini 2 telefonnal tettem meg. Ha követed az instrukciókat, figyelmeztetlek, nem vállalok felelõsséget, hogy miket csinálsz a telefonoddal. Nekem sikerült. Ez itt nem utasítás csupán leírom, hogy én hogyan csináltam a saját telefonommal.
+
+    Elõször kivettem a sim kártyát és bekapcsoltam a készüléket.
+    Gondoltam egyet és a tárcsázóba beírtam a következõt: *#7465625# majd leokéztam.
+    Ezután a tárcsázóba ezt írtam be: *#197328640# , ekkor bejött a szervíz menü és én a [1] DEBUG SCREEN gombra kattintottam
+    Utána a [8] PHONE CONTROL gombra kattintottam
+    Azután megérintettem a [6] NETWORK LOCK feliratot
+    A legutolsóként a [4] NW LOCK NV DATA INITIALIZE gombot nyomtam meg, ekkor nem csinál semmit, Fontos, hogy most várjak 1-2 percet!
+    Kikapcsoltam majd bekapcsoltam a telefont és tárcsáztam ezt: *#7465625# , látom ám, hogy minden OFF, naiszen mondom
+    Tárcsáztam ezt: *2767*3855# , ez most visszaállítja a telefont a gyári állapotba és töröl minden zárat
+    Újraindítottam, lekapcsoltam és mehet bele bármilyen simkártya.
+    Kész a függetlenítés :)
+*2767*3855# ,

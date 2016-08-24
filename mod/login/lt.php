@@ -2,6 +2,8 @@
 namespace mod\login;
 class LT{
 public static $hu=[
+'reg_email_send'=>'A regisztrációs emailt kiküldtük! ',
+ 'reg_email_nosucces'=>'A regisztrációs email küldése nem sikerült!' ,  
 'database_err'	=>'Adatbázis hiba kérjük próbálja újra!',
 'captcha_err'	=>'A captcha kód nem megfelelő!',     
  'long_err'	=>'A(z) <<MEZO>> mezonerk min <<MIN>>, max <<MAX>> karakternek kell lenni!',   

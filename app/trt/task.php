@@ -18,10 +18,13 @@ trait Task {
     public function task_futtat()
     {
         $task=$this->ADT['task'];
+        
+        
         if(isset($this->ADT['TSK'][$task]['evalString']))
         { eval($this->ADT['TSK'][$task]['evalString']); }
         
-        $trt=$trt=$this->ADT['TSK'][$task]['trt'] ?? [];;
+        $trt=$trt=$this->ADT['TSK'][$task]['trt'] ?? [];
+        $trt[]='\Base_Joghiba';
         
         $classnev=$this->ADT['appdNev'] ?? 'app'.$task;
 
@@ -41,7 +44,8 @@ trait Task {
         //echo '$func'.$func;
         if($func=='')
         {$task='';}
-        else{
+        else
+        {
             //eval('$ADT=$'.$modnev.'->'.$func.'();');
             if(isset($this->ADT['TSK'][$task]['eval']))
             {
@@ -63,9 +67,10 @@ trait Task {
     {
         $func='Res';
         $task=$this->ADT['task'];
+        $funcnev=ucfirst($task);
         //futtatandó funkció:ADT-ben deklarált, vagy a task név vagy TSK ban deklarált
         if(isset($this->ADT['resfunc']) && method_exists($clasnev,$this->ADT['resfunc'])){$func=$this->ADT['resfunc'];}
-        if(method_exists($clasnev,$task)){$func=$task;}
+        if(method_exists($clasnev,$funcnev)){$func=$funcnev;}
         if(isset($this->ADT['TSK'][$task]['resfunc']) && method_exists($clasnev,$this->ADT['TSK'][$task]['resfunc'])){$func=$this->ADT['TSK'][$task]['resfunc'];}
 
         if($func==''){\GOB::$logT['Task'][]='nincs a task trait-nek mghívható funkciója';}

@@ -61,7 +61,7 @@ class TSK{
 ADT::$paramT['Ikon_ClikkSor']['getID']='task';
 ADT::$paramT['Ikon_ClikkSor']['ikonsorT']=[];
 //ADT::$paramT['Ikon_ClikkSor']['glyph']=true;
-ADT::$paramT['Tabla']['dataszerkT']=['id'=>['nocim'=>true,'func'=>'eyeLink','funcEvalparam'=>'index.php?app=admin&iniF=mod&mod=tab_emailcim&emailid=\'.$rekord["id"].\'&key=mailid'],'cim'=>['func'=>'listaLink','funcEvalparam'=>'index.php?app=admin&iniF=mod&mod=tab_emailcim&emailid=\'.$rekord["id"].\''],'subject'=>[],'res'=>[],'datum'=>[]];
+ADT::$paramT['Tabla']['dataszerkT']=['id'=>['nocim'=>true,'func'=>'eyeLink','funcEvalparam'=>'index.php?app=admin&iniF=mod&mod=tab_email&emailid=\'.$rekord["id"].\'&key=mailid'],'cim'=>['func'=>'listaLink','funcEvalparam'=>'index.php?app=admin&iniF=mod&mod=tab_emailcim&emailid=\'.$rekord["id"].\''],'subject'=>[],'res'=>[],'datum'=>[]];
 ADT::$paramT['Pagin']['limit']='10';
 \GOB::$tmpl='admin';
 ADT::$LT['lapcim']='Elküldött levelek';

@@ -10,6 +10,18 @@ $iniF=$_GET['iniF'] ?? \GOB::$app;
 $iniF=str_replace('_', '/', $iniF);
 include 'app/'.\GOB::$app.'/'.$iniF.'.ini.php';
 
+//$loginTRT['SetLT']='\lib\lang\trt\\'.\CONF::$LangMode.'\\'.\CONF::$LangForras.'\Set_SetLT';
+$TRTbase['AppIni']='\app\admin\trt\task\AppIni';
+$TRTbase['SetLT']='\app\trt\Empty_SetLT';
+$TRTbase['SetTask']='\app\trt\Empty_SetTask';
+//$TRT['GetJog']='\lib\task\trt\Task_PG_GetTask';
+$TRTbase['Task']='\app\trt\Empty_Task';
+$TRTbase['ChangeLT']='\app\trt\Empty_ChangeLT';
+$TRTbase['ChangeData']='\app\trt\Empty_ChangeData';
+$TRTbase['ChangeMod']='\app\trt\Empty_ChangeMod';
+if(isset($TRT)){$TRT=array_merge ($TRTbase,$TRT);}
+else{$TRT=$TRTbase;}
+
 eval(\lib\base\Ob_TrtS::str('AppBase',$TRT));
 
 class App extends \AppBase
@@ -45,7 +57,9 @@ class App extends \AppBase
         $html=$app->html ?? 'base';
         
         //html betöltése
-        \GOB::$html=file_get_contents('tmpl/'.\GOB::$tmpl.'/'.$this->ADT['html'],true);
+        if(is_file('tmpl/'.\GOB::$tmpl.'/'.$this->ADT['html']))
+        { \GOB::$html=file_get_contents('tmpl/'.\GOB::$tmpl.'/'.$this->ADT['html'],true);}
+        else{\GOB::$html=$this->ADT['html'];}
        
         //ini file betöltése
         if(is_file(\GOB::$tmpl.$this->ADT['html'].'.php'))

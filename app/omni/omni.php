@@ -7,11 +7,12 @@ use lib\db\DBA;
 \GOB::$html=file_get_contents('tmpl/omni/base.html',true);  
 
 if($_SESSION['userid']==0){
- 
-    $content=file_get_contents('tmpl/omni/mod/nyito.html',true);  
+    \GOB::$html=file_get_contents('tmpl/omni/nyito.html',true);
+    $content='<h3>Ez az oldal annak jelenik meg aki még nem regisztrált, nem jelentkezett be. </h3>';  
 }
 else
 {  
+    \GOB::$html=file_get_contents('tmpl/omni/base.html',true);    
 if(isset($_GET['fajta']) && isset($_GET['valtozat'])){
     $sql="SELECT fajta,var FROM kenel WHERE userid='".$_SESSION['userid']."'";
     $userT= DB::assoc_sor($sql);

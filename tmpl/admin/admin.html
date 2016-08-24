@@ -29,17 +29,23 @@ $(document).ready(function(){
 	$('body').on('hidden.bs.modal', '.modal', function () {
 	    $(this).removeData('bs.modal');
 	});
+	$("#myModal").on("show.bs.modal", function(e) {
+	    var link = $(e.relatedTarget);
+	    $(this).find(".modal-body").load(link.attr("href"));
+	   
+	});	
 	
-	$('.btn').onclick().confirm({
-	    title: 'Confirm!',
-	    content: 'Simple confirm!',
-	    confirm: function(){
-	        $.alert('Confirmed!');
-	    },
-	    cancel: function(){
-	        $.alert('Canceled!')
+	$(".confirmdelete").click(function(){
+	    if(confirm("Az Ok gombra kattintva, a kiválasztott elem véglegesen törlődni fog!")){
+	       // $("#delete-button").attr("href", "index.php");
+	      
+	    }
+	    else{
+	        return false;
 	    }
 	});
+	
+	
 	
 });
 
@@ -74,12 +80,14 @@ function home()
 }
 function image_del(id) 
 {
-	
-	  $.get(medialink+'&med=del&did='+id,function(data, status){
-		  data_betolt(data)  ;
-	  }
-	  ) ;
-	
+	 if(confirm('Az Ok-- gombra kattintva, a kiválasztott elem véglegesen törlődni fog!'))
+	 {
+		  $.get(medialink+'&med=del&did='+id,function(data, status){
+			  data_betolt(data)  ;
+		  }) ; 
+	 }
+	 else{return false; } 
+	 
 }
 function newdir() 
 {
@@ -210,7 +218,7 @@ padding:20px;
                     <li class="active" role="presentation"><a href="index.php?app=admin&iniF=userek">Userek</a></li>
                     <li role="presentation"><a href="index.php?app=admin&iniF=email">Emailok</a></li>
                     <li role="presentation"><a href="index.php?app=admin&iniF=omni/fajta">Fajták</a></li>
-                    <li role="presentation"><a href="index.php?app=admin&iniF=omni/fajtavar">Fajta változataok</a></li>
+                 
                 </ul>
             </div>
         </div>
@@ -232,7 +240,7 @@ padding:20px;
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Select a File to Upload</h4>
+      <!--   <h4 class="modal-title">Select a File to Upload</h4> -->
       </div>
       <div id="modalbase" class="modal-body">
  
